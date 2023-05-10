@@ -1,15 +1,15 @@
 <template>
   <div class="container">
     <div class="datas">
-    <div class="currency">
-      <label for="">Currency</label>
-      <b-form-select v-model="selected" :options="options" :state="null" ></b-form-select>
+      <div class="currency">
+        <label for="">Currency</label>
+        <b-form-select v-model="selected" :options="options" :state="null"></b-form-select>
 
-    </div>
-    <div class="date">
-      <label for="example-datepicker">Date</label>
-      <b-form-datepicker id="example-datepicker" v-model="currentDate" class="mb-2"></b-form-datepicker>
-    </div>
+      </div>
+      <div class="date">
+        <label for="example-datepicker">Date</label>
+        <b-form-datepicker id="example-datepicker" v-model="currentDate" class="mb-2"></b-form-datepicker>
+      </div>
       <FormModal ref="modal" :currency="selected" :date="currentDate" :currencyValue="currencyValue"></FormModal>
     </div>
     <div class="currency-value-container">
@@ -17,7 +17,7 @@
     </div>
     <b-button id="show-btn" @click="getValues">Get Values</b-button>
     <p class="error" v-if="isBoth">Nie wybrano waluty i daty</p>
-    <p class="error" v-if="isCurrency">Nie wybrano  waluty</p>
+    <p class="error" v-if="isCurrency">Nie wybrano waluty</p>
     <p class="error" v-if="isDate">Nie wybrano daty</p>
     <SevenDaysModal ref="sevenDays" :currency="selected" :date="currentDate" :currencyValue="currencyValue" :API="API"/>
   </div>

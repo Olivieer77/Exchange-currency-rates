@@ -41,21 +41,31 @@ export default {
 
       }
     },
-    get7daysValues() {
-      let today = new Date();
-      let weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-      let endDate = today.toISOString().substring(0, 10);
-      let startDate = weekAgo.toISOString().substring(0, 10);
-      let url = `${this.API}${this.currency}/${startDate}/${endDate}`;
-      fetch(url)
-          .then(response => response.json())
-          .then(data => {
-            this.exchangeRates = data.rates;
-            this.updateTableData();
-          })
-          .catch(error => {
-            console.log(error);
-          });
+    async get7daysValues() {
+      try {
+        let today = new Date();
+        let weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+        let endDate = today.toISOString().substring(0, 10);
+        let startDate = weekAgo.toISOString().substring(0, 10);
+        let url = `${this.API}${this.currency}/${startDate}/${endDate}`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+        this.exchangeRates = data.rates;
+        this.updateTableData();
+
+      } catch (error) {
+        console.log(error);
+      }
+      // fetch(url)
+      //     .then(response => response.json())
+      //     .then(data => {
+      //       this.exchangeRates = data.rates;
+      //       this.updateTableData();
+      //     })
+      //     .catch(error => {
+      //       console.log(error);
+      //     });
     },
     updateTableData() {
       this.items = [];
